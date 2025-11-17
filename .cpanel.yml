@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOY_PATH=/home1/rudrarmq/floatingflowerfilms.com
+    - export DEPLOY_PATH=/home1/rudrarmq/rtportfolios.ml/rover-rajasthan
     - /bin/cp -R * $DEPLOY_PATH
