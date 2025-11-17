@@ -1,0 +1,62 @@
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import "swiper/swiper-bundle.css";
+/* Custom font import for Inter and a background image for the hero */
+@import "https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Swiper Styles to match the theme */
+.swiper-pagination-bullet {
+    @apply !bg-gray-300 !opacity-100;
+}
+.swiper-pagination-bullet-active {
+    @apply !bg-roberto-teal; /* Primary accent color */
+}
+
+/* Custom Swiper navigation button color */
+.swiper-button-next,
+.swiper-button-prev {
+    @apply !text-roberto-dark; /* Deep primary color for visibility */
+}
+
+.swiper-wrapper {
+    transition-timing-function: linear !important;
+}
+.default-btn {
+    @apply border-2 px-5 py-2 rounded-ss-xl rounded-ee-xl transition-all;
+
+    &:hover {
+        @apply rounded-se-xl rounded-es-xl rounded-ss-none rounded-ee-none border-roberto-dark bg-roberto-dark;
+    }
+}
+
+#hero-bg {
+    /* Updated to a high-quality placeholder image of an iconic Indian landmark */
+    background-image: url("https://placehold.co/1920x800/123447/FFFFFF?text=Gateway+of+India%0AConnecting+Bharat");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Styling for the animated feature icons (Kept for visual appeal) */
+.feature-icon-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-icon-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+header {
+    a:not(.logo),
+    button {
+        @apply py-5;
+    }
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    color: #fff !important;
+}
