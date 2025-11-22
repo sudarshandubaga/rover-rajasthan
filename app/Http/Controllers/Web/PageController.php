@@ -19,8 +19,8 @@ class PageController extends Controller
         $pageName = $page->template ?? 'page';
 
         switch ($pageName) {
-            case 'news':
-                return $this->news($page);
+            case 'blog':
+                return $this->blog($page);
 
             case 'cab-services':
                 return $this->cabServices($page);
@@ -45,7 +45,7 @@ class PageController extends Controller
         }
     }
 
-    private function news($page)
+    private function blog($page)
     {
         $blogs = Blog::latest()->paginate(15);
         return view('web.screens.news', compact('page', 'blogs'));

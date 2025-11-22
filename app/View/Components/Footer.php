@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Header extends Component
+class Footer extends Component
 {
     /**
      * Create a new component instance.
@@ -27,6 +27,6 @@ class Header extends Component
         $dayPackages = TourPackage::where('type', 'daytour')->pluck('name', 'slug');
         $cabServices = CabService::pluck('title', 'slug');
 
-        return view('components.header', compact('sightseeingPackages', 'dayPackages', 'cabServices'));
+        return view('components.footer', compact('sightseeingPackages', 'dayPackages', 'cabServices'));
     }
 }

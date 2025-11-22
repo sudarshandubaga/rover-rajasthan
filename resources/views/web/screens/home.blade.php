@@ -24,46 +24,58 @@
     <!-- Booking Form Section (Updated Form Fields for City Travel) -->
     <section id="booking-form" class="relative -mt-16 lg:-mt-24 z-20 container mx-auto px-4">
         <div class="bg-white rounded-xl shadow-2xl p-6 lg:p-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="flex gap-4 mb-4">
+                <button class="trip-tab bg-roberto-teal text-white px-4 py-2 rounded-lg border shadow"
+                    data-trip="local">Local Trip</button>
+                <button class="trip-tab bg-white text-gray-600 px-4 py-2 rounded-lg border shadow" data-trip="oneway">One
+                    Way Trip</button>
+                <button class="trip-tab bg-white text-gray-600 px-4 py-2 rounded-lg border shadow" data-trip="round">Round
+                    Trip</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
                 <!-- Dropdowns (Modified for Source/Destination City) -->
                 <div class="space-y-1">
-                    <label class="block text-xs font-semibold uppercase text-gray-500">Source City</label>
-                    <select
-                        class="w-full border border-gray-300 rounded-lg p-3 appearance-none focus:ring-roberto-teal focus:border-roberto-teal">
-                        <option>Delhi</option>
-                        <option>Mumbai</option>
-                        <option>Bengaluru</option>
-                        <option>Chennai</option>
-                        <option>Kolkata</option>
-                        <option>Jaipur</option>
-                    </select>
+                    <label class="block text-xs font-semibold uppercase text-gray-500" for="source_city">Source City</label>
+                    <x-select-dropdown id="source_city" required>
+                        <option value="">--select--</option>
+                        @foreach ($cities as $id => $name)
+                            <option value="{{ $id }}">{{ $name }}</option>
+                        @endforeach
+                    </x-select-dropdown>
                 </div>
-                <div class="space-y-1">
-                    <label class="block text-xs font-semibold uppercase text-gray-500">Destination City</label>
-                    <select
-                        class="w-full border border-gray-300 rounded-lg p-3 appearance-none focus:ring-roberto-teal focus:border-roberto-teal">
-                        <option>Mumbai</option>
-                        <option>Delhi</option>
-                        <option>Bengaluru</option>
-                        <option>Chennai</option>
-                        <option>Kolkata</option>
-                        <option>Jaipur</option>
-                    </select>
+                <!-- Destination City -->
+                <div class="space-y-1" id="destination-wrapper">
+                    <label class="block text-xs font-semibold uppercase text-gray-500" for="destination_city">
+                        Destination City
+                    </label>
+                    <x-select-dropdown id="destination_city" required>
+                        <option value="">--select--</option>
+                        @foreach ($cities as $id => $name)
+                            <option value="{{ $id }}">{{ $name }}</option>
+                        @endforeach
+                    </x-select-dropdown>
                 </div>
+
                 <div class="space-y-1">
                     <label class="block text-xs font-semibold uppercase text-gray-500">Travel Date</label>
                     <input type="date" value="2026-06-15"
                         class="w-full border border-gray-300 rounded-lg p-3 focus:ring-roberto-teal focus:border-roberto-teal" />
                 </div>
                 <div class="space-y-1">
-                    <label class="block text-xs font-semibold uppercase text-gray-500">Pax/Seats</label>
-                    <select
-                        class="w-full border border-gray-300 rounded-lg p-3 appearance-none focus:ring-roberto-teal focus:border-roberto-teal">
-                        <option>1 Seat</option>
-                        <option>2 Seats</option>
-                        <option>3 Seats</option>
-                        <option>4+ Seats</option>
-                    </select>
+                    <label class="block text-xs font-semibold uppercase text-gray-500" for="contact_no">Contact No.</label>
+                    <input type="tel" value="" id="contact_no" placeholder="Contact No."
+                        class="w-full border border-gray-300 rounded-lg p-3 focus:ring-roberto-teal focus:border-roberto-teal" />
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold uppercase text-gray-500">Vehicle Type</label>
+                    <x-select-dropdown>
+                        <option value="">--select--</option>
+                        @foreach ($cabs as $cab)
+                            <option value="{{ $cab->id }}">{{ $cab->vehicle_type }} ({{ $cab->capacity }} Seater)
+                            </option>
+                        @endforeach
+                    </x-select-dropdown>
                 </div>
 
                 <!-- Search Button -->
@@ -122,7 +134,11 @@
     <!-- Tour Package Showcase Section -->
     <section id="tours" class="bg-gray-100 py-16 md:py-24">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 bg-white shadow-xl rounded-xl overflow-hidden">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold uppercase text-roberto-teal tracking-widest">TAXI</span>
+                <h2 class="text-4xl font-bold text-roberto-dark mt-2">Vehicles We Offer</h2>
+            </div>
+            {{-- <div class="grid grid-cols-1 lg:grid-cols-2 bg-white shadow-xl rounded-xl overflow-hidden">
                 <!-- Tour Image (Updated with real-looking image) -->
                 <div class="h-80 lg:h-auto">
                     <img src="{{ asset('images/Taj_Mahal.webp') }}" alt="Taj Mahal Agra"
@@ -161,6 +177,28 @@
                         Book This Package
                     </a>
                 </div>
+            </div> --}}
+
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-5">
+                @foreach ($cabs as $cab)
+                    <div class="bg-white p-5 rounded-lg">
+                        <div class="image">
+                            <img src="{{ $cab->image }}" alt="{{ $cab->vehicle_type }}" class="w-full aspect-video">
+                        </div>
+                        <div class="flex justify-between items-center mt-5">
+                            <div>
+                                <h4 class="text-orange-500 font-bold text-lg">{{ $cab->vehicle_type }}</h4>
+
+                                <div class="text-gray-400">
+                                    {{ $cab->capacity }} Seater
+                                </div>
+                            </div>
+                            <div class="font-bold text-3xl">
+                                ₹{{ $cab->fare }} / km
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -340,3 +378,35 @@
         </div>
     </section>
 @endsection
+
+@push('extra_scripts')
+    <script>
+        $(document).ready(function() {
+            function setActiveTab(trip) {
+                $(".trip-tab").removeClass("bg-roberto-teal text-white").addClass("bg-white text-gray-600");
+                $('.trip-tab[data-trip="' + trip + '"]').removeClass("bg-white text-gray-600").addClass(
+                    "bg-roberto-teal text-white");
+            }
+
+            function updateFormFields(trip) {
+                if (trip === "local") {
+                    $("#destination-wrapper").hide();
+                } else {
+                    $("#destination-wrapper").show();
+                }
+            }
+
+            // default
+            let currentTrip = "local";
+            setActiveTab(currentTrip);
+            updateFormFields(currentTrip);
+
+            // on tab click
+            $(".trip-tab").on("click", function() {
+                let trip = $(this).data("trip");
+                setActiveTab(trip);
+                updateFormFields(trip);
+            });
+        });
+    </script>
+@endpush

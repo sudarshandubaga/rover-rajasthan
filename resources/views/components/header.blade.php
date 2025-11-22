@@ -11,8 +11,26 @@
             {{-- <a href="#home" class="hover:text-roberto-teal transition duration-200">Home</a> --}}
             <a href="{{ route('page.show', 'about-us') }}" class="hover:text-roberto-teal transition duration-200">About
                 Us</a>
-            <a href="{{ route('page.show', 'cab-services') }}"
-                class="hover:text-roberto-teal transition duration-200">Cab Services</a>
+            {{-- <a href="{{ route('page.show', 'cab-services') }}"
+                class="hover:text-roberto-teal transition duration-200">Cab Services</a> --}}
+
+            <!-- Day Tours Dropdown -->
+            <div class="group relative">
+                <button class="hover:text-roberto-teal transition duration-200 flex items-center gap-1">
+                    Cab Services
+                    <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div
+                    class="absolute left-0 hidden group-hover:block bg-roberto-dark/95 backdrop-blur-sm shadow-lg rounded-md  min-w-[250px] text-nowrap">
+                    @foreach ($cabServices as $slug => $title)
+                        <a href="{{ route('cab-service.show', $slug) }}"
+                            class="block px-5 py-2 hover:bg-roberto-teal/20">{{ $title }}</a>
+                    @endforeach
+                </div>
+            </div>
 
             <!-- Sightseeing Tours Dropdown -->
             <div class="group relative">
@@ -58,10 +76,10 @@
         </nav>
 
         <!-- Book Button -->
-        <button
+        <a href="{{ route('page.show', 'contact-us') }}"
             class="hidden lg:block bg-amber-600 text-white font-bold py-2 px-6 rounded-md hover:bg-orange-400 transition duration-200">
             BOOK A RIDE
-        </button>
+        </a>
 
         <!-- Mobile Menu Button -->
         <button id="mobile-menu-toggle" class="lg:hidden text-white">
@@ -88,7 +106,8 @@
             </div>
         </details>
 
-        <a href="#customize" class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">Customize
+        <a href="{{ route('page.show', 'customized-tour') }}"
+            class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">Customize
             Tour</a>
 
         <details class="border-t border-white/10">

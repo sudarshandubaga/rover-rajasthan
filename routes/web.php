@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CabController;
+use App\Http\Controllers\CabServiceController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiryController as ControllersEnquiryController;
 use App\Http\Controllers\FaqController;
@@ -9,6 +12,7 @@ use App\Http\Controllers\PageController as ControllersPageController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\TourPackageController as ControllersTourPackageController;
+use App\Http\Controllers\Web\CabServiceController as WebCabServiceController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\PageController;
 use App\Http\Controllers\Web\TourPackageController;
@@ -30,9 +34,13 @@ Route::group([
         Route::get('/site-setting', [SiteController::class, 'create'])->name('site.edit');
         Route::put('/site-setting', [SiteController::class, 'update'])->name('site.update');
 
+        Route::post('/cab-service/{cabService}/details', [CabServiceController::class, 'updateDetails'])->name('cab-service.details');
 
         Route::resources([
             'slider'            => SliderController::class,
+            'city'              => CityController::class,
+            'cab'               => CabController::class,
+            'cab-service'       => CabServiceController::class,
             'faq'               => FaqController::class,
             'enquiry'           => ControllersEnquiryController::class,
             'blog'              => BlogController::class,
@@ -46,5 +54,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/enquiry-submit', [ControllersEnquiryController::class, 'store'])->name('enquiry.submit');
 Route::post('/customize-tour', [PageController::class, 'storeTourEnquiry'])->name('customize-tour.submit');
 Route::get('/tours/{tourPackage}', [TourPackageController::class, 'show'])->name('tour.show');
+Route::get('/cab-service/{cabService}', [WebCabServiceController::class, 'show'])->name('cab-service.show');
 Route::resource('/blog', BlogController::class)->only(['show']);
 Route::get('{page}', [PageController::class, 'show'])->name('page.show');

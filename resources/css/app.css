@@ -60,3 +60,12 @@ header {
 .swiper-button-next:after {
     color: #fff !important;
 }
+
+.select-dropdown {
+    @apply relative overflow-hidden;
+
+    &::after {
+        @apply absolute right-0 top-0 bottom-0 flex items-center justify-center px-3 bg-gray-100 z-10 w-3;
+        content: "▼";
+    }
+}

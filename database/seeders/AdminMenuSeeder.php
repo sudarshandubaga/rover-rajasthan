@@ -35,10 +35,46 @@ class AdminMenuSeeder extends Seeder
         ]);
 
         $this->addRow([
+            'label' => 'Cities',
+            'icon'  => 'bx bxs-city',
+            'route_name' => 'admin.city.index',
+        ]);
+
+        $this->addRow([
             'label' => 'Pages',
             'icon'  => 'bx bx-notepad',
             'route_name' => 'admin.page.index'
         ]);
+
+        $this->addRow([
+            'label' => 'Cab Type',
+            'icon'  => 'bx bxs-bus',
+        ]);
+
+        $this->addRow([
+            'label' => 'Create New Cab Type',
+            'route_name' => 'admin.cab.create',
+        ], true);
+
+        $this->addRow([
+            'label' => 'View Cab Types',
+            'route_name' => 'admin.cab.index',
+        ], true);
+
+        $this->addRow([
+            'label' => 'Cab Service',
+            'icon'  => 'bx bxs-taxi',
+        ]);
+
+        $this->addRow([
+            'label' => 'Create New Cab Service',
+            'route_name' => 'admin.cab-service.create',
+        ], true);
+
+        $this->addRow([
+            'label' => 'View Cab Services',
+            'route_name' => 'admin.cab-service.index',
+        ], true);
 
         $this->addRow([
             'label' => 'FAQ',
