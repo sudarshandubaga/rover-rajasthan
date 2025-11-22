@@ -83,46 +83,70 @@
 
         <!-- Mobile Menu Button -->
         <button id="mobile-menu-toggle" class="lg:hidden text-white">
-            <i class="w-6 h-6">Menu</i>
+            <i class="w-6 h-6">
+                <i class="bi bi-list text-4xl"></i>
+            </i>
         </button>
     </div>
 
     <!-- Mobile Navigation -->
+    <!-- Mobile Navigation -->
     <div id="mobile-menu" class="hidden lg:hidden bg-roberto-dark text-white/90">
-        <a href="#home" class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">Home</a>
-        <a href="#about" class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">About Us</a>
-        <a href="#cab-services" class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">Cab
-            Services</a>
 
-        <!-- Mobile Dropdowns -->
+        <a href="{{ route('home') }}" class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">
+            Home
+        </a>
+
+        <a href="{{ route('page.show', 'about-us') }}"
+            class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">
+            About Us
+        </a>
+
+        <!-- Cab Services -->
+        <details class="border-t border-white/10">
+            <summary class="px-6 py-3 cursor-pointer hover:bg-roberto-teal/20">Cab Services</summary>
+            <div class="bg-roberto-dark/90">
+                @foreach ($cabServices as $slug => $title)
+                    <a href="{{ route('cab-service.show', $slug) }}" class="block px-8 py-2 hover:bg-roberto-teal/20">
+                        {{ $title }}
+                    </a>
+                @endforeach
+            </div>
+        </details>
+
+        <!-- Sightseeing Tours -->
         <details class="border-t border-white/10">
             <summary class="px-6 py-3 cursor-pointer hover:bg-roberto-teal/20">Sightseeing Tours</summary>
             <div class="bg-roberto-dark/90">
-                <a href="#jaipur" class="block px-8 py-2 hover:bg-roberto-teal/20">Jaipur Sightseeing</a>
-                <a href="#udaipur" class="block px-8 py-2 hover:bg-roberto-teal/20">Udaipur Sightseeing</a>
-                <a href="#bikaner" class="block px-8 py-2 hover:bg-roberto-teal/20">Bikaner Sightseeing</a>
-                <a href="#agra" class="block px-8 py-2 hover:bg-roberto-teal/20">Agra Sightseeing</a>
-                <a href="#delhi" class="block px-8 py-2 hover:bg-roberto-teal/20">Delhi Sightseeing</a>
+                @foreach ($sightseeingPackages as $pkgSlug => $pkgName)
+                    <a href="{{ route('tour.show', $pkgSlug) }}" class="block px-8 py-2 hover:bg-roberto-teal/20">
+                        {{ $pkgName }}
+                    </a>
+                @endforeach
             </div>
         </details>
 
         <a href="{{ route('page.show', 'customized-tour') }}"
-            class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">Customize
-            Tour</a>
+            class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">
+            Customize Tour
+        </a>
 
+        <!-- Day Tours -->
         <details class="border-t border-white/10">
             <summary class="px-6 py-3 cursor-pointer hover:bg-roberto-teal/20">Day Tours</summary>
             <div class="bg-roberto-dark/90">
-                <a href="#halfday" class="block px-8 py-2 hover:bg-roberto-teal/20">Jodhpur Sightseeing Half Day
-                    Tour</a>
-                <a href="#fullday" class="block px-8 py-2 hover:bg-roberto-teal/20">Jodhpur Sightseeing Full Day
-                    Tour</a>
-                <a href="#2days" class="block px-8 py-2 hover:bg-roberto-teal/20">Jodhpur Sightseeing 2 Days
-                    Tour</a>
+                @foreach ($dayPackages as $pkgSlug => $pkgName)
+                    <a href="{{ route('tour.show', $pkgSlug) }}" class="block px-8 py-2 hover:bg-roberto-teal/20">
+                        {{ $pkgName }}
+                    </a>
+                @endforeach
             </div>
         </details>
 
-        <a href="#contact" class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">Contact
-            Us</a>
+        <a href="{{ route('page.show', 'contact-us') }}"
+            class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">
+            Contact Us
+        </a>
     </div>
+
 </header>
