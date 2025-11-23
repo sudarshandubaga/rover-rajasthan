@@ -2,9 +2,10 @@
 <header class="sticky top-0 z-50 bg-roberto-dark shadow-lg">
     <div class="container mx-auto flex items-center justify-between">
         <!-- Logo -->
-        <a href="{{ route('home') }}" class="text-2xl font-bold text-white uppercase tracking-wider logo">
+        {{-- <a href="{{ route('home') }}" class="text-2xl font-bold text-white uppercase tracking-wider logo">
             <img src="{{ $site->logo }}" alt="{{ $site->title }}" class="h-14" loading="lazy">
-        </a>
+        </a> --}}
+        <x-logo />
 
         <!-- Desktop Navigation -->
         <nav class="hidden lg:flex space-x-5 text-lg font-medium text-white/80 relative">

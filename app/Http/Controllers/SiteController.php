@@ -30,6 +30,7 @@ class SiteController extends Controller
     {
         $site = $this->site;
         $site->title = $request->title;
+        $site->tagline = $request->tagline;
         $site->email = $request->email;
         $site->phone = $request->phone;
         // $site->mobile = $request->mobile;

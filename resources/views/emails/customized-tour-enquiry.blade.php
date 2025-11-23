@@ -26,6 +26,11 @@
                 <td>{{ $enquiry->email }}</td>
             </tr>
 
+            <tr>
+                <td><strong>Contact No.:</strong></td>
+                <td>{{ $enquiry->contact_no }}</td>
+            </tr>
+
             <tr style="background: #fafafa;">
                 <td><strong>Destinations:</strong></td>
                 <td>{{ $enquiry->destinations ?? 'N/A' }}</td>

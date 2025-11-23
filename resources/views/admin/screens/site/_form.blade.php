@@ -6,6 +6,12 @@
                 value="{{ old('title', $site->title ?? '') }}">
         </div>
 
+        <div class="mb-3">
+            <label for="tagline" class="form-label">Tagline</label>
+            <input type="text" name="tagline" id="tagline" class="form-control" placeholder="Enter tagline"
+                value="{{ old('tagline', $site->tagline ?? '') }}">
+        </div>
+
         <div class="row">
             <div class="col-sm-6 mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -56,7 +62,7 @@
     <div class="col-sm-4 col-lg-3">
         <div class="mb-3">
             <label for="logo_file" class="form-label">Choose Logo</label>
-            <x-crop-image name="logo" image_file="logo_file" width="280" height="80"
+            <x-crop-image name="logo" image_file="logo_file" width="210" height="150"
                 image="{{ $site->logo }}" />
         </div>
         <div class="mb-3">
