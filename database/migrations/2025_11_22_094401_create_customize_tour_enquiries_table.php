@@ -16,6 +16,7 @@ return new class extends Migration
             // Personal Information
             $table->string('name');
             $table->string('email');
+            $table->string('contact_no');
 
             // Trip Details
             $table->string('destinations')->nullable();

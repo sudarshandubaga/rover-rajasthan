@@ -56,6 +56,7 @@
             <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
                 <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Tell Us Your Travel Plans</h2>
 
+                <x-web-alert />
                 <form action="{{ route('customize-tour.store') }}" method="POST"
                     class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @csrf
@@ -65,9 +66,11 @@
                         <h3 class="text-lg font-semibold text-orange-700 border-b pb-2 mb-4">Personal Information</h3>
                     </div>
 
-                    <input type="text" name="name" placeholder="Your Name"
-                        class="w-full p-3 border border-slate-300 rounded-md" required>
+                    <input type="text" name="name" placeholder="Your Full Name"
+                        class="w-full p-3 border border-slate-300 rounded-md md:col-span-2" required>
                     <input type="email" name="email" placeholder="Your Email"
+                        class="w-full p-3 border border-slate-300 rounded-md" required>
+                    <input type="tel" name="contact_no" placeholder="Your Contact No."
                         class="w-full p-3 border border-slate-300 rounded-md" required>
 
                     {{-- Trip Details --}}
@@ -80,24 +83,26 @@
 
                     <div>
                         <label class="block text-sm font-medium text-slate-500 mb-1">Start Date</label>
-                        <input type="date" name="start_date" class="w-full p-3 border border-slate-300 rounded-md">
+                        <input type="date" name="start_date" min="{{ date('Y-m-d', strtotime('+1 day')) }}"
+                            class="w-full p-3 border border-slate-300 rounded-md">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-slate-500 mb-1">End Date</label>
-                        <input type="date" name="end_date" class="w-full p-3 border border-slate-300 rounded-md">
+                        <input type="date" name="end_date" min="{{ date('Y-m-d', strtotime('+1 day')) }}"
+                            class="w-full p-3 border border-slate-300 rounded-md">
                     </div>
 
                     <input type="number" name="travelers" placeholder="Number of Travelers"
                         class="w-full p-3 border border-slate-300 rounded-md" min="1">
 
-                    <select name="budget" class="w-full p-3 border border-slate-300 rounded-md text-slate-500">
+                    <x-select-dropdown name="budget" class="w-full p-3 border border-slate-300 rounded-md text-slate-500">
                         <option value="">Budget per Person (INR)</option>
                         <option value="<1000">Under ₹1000</option>
-                        <option value="1000-2000">₹1000 - ₹5000</option>
-                        <option value="2000-3000">₹5000 - ₹10000</option>
-                        <option value=">3000">Over ₹10000</option>
-                    </select>
+                        <option value="1000-5000">₹1000 - ₹5000</option>
+                        <option value="5000-10000">₹5000 - ₹10000</option>
+                        <option value=">10000">Over ₹10000</option>
+                    </x-select-dropdown>
 
                     {{-- Preferences --}}
                     <div class="md:col-span-2 mt-4">
@@ -129,20 +134,21 @@
                         </div>
                     </div>
 
-                    <select name="accommodation" class="w-full p-3 border border-slate-300 rounded-md text-slate-500">
+                    <x-select-dropdown name="accommodation"
+                        class="w-full p-3 border border-slate-300 rounded-md text-slate-500">
                         <option value="">Accommodation Style</option>
                         <option value="budget">Budget</option>
                         <option value="mid-range">Mid-range</option>
                         <option value="luxury">Luxury</option>
                         <option value="boutique">Boutique / Heritage</option>
-                    </select>
+                    </x-select-dropdown>
 
-                    <select name="pace" class="w-full p-3 border border-slate-300 rounded-md text-slate-500">
+                    <x-select-dropdown name="pace" class="w-full p-3 border border-slate-300 rounded-md text-slate-500">
                         <option value="">Preferred Travel Pace</option>
                         <option value="relaxed">Relaxed</option>
                         <option value="moderate">Moderate</option>
                         <option value="fast-paced">Fast-paced</option>
-                    </select>
+                    </x-select-dropdown>
 
                     <textarea name="notes" rows="5" placeholder="Any other requirements or specific places you want to visit?"
                         class="md:col-span-2 w-full p-3 border border-slate-300 rounded-md"></textarea>

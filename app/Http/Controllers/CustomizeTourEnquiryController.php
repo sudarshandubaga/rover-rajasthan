@@ -27,6 +27,7 @@ class CustomizeTourEnquiryController extends Controller
             // Personal Info
             'name'          => ['required', 'string', 'max:255'],
             'email'         => ['required', 'email', 'max:255'],
+            'contact_no'    => ['required', 'string', 'max:20'],
 
             // Trip Details
             'destinations'  => ['nullable', 'string', 'max:255'],
@@ -51,7 +52,7 @@ class CustomizeTourEnquiryController extends Controller
 
         Mail::to($this->site->email)->send(new CustomizeTourEnquiryMail($enquiry));
 
-        return redirect()->back()->with('success', 'Your travel enquiry has been submitted successfully!');
+        return redirect()->back()->with('success', 'Thank You! Your travel enquiry has been submitted successfully!');
     }
 
     /**

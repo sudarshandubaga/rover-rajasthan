@@ -20,15 +20,11 @@
                                 <tr>
                                     <th>SNo.</th>
                                     <th>Contact</th>
-                                    {{-- <th>Email</th> --}}
                                     <th>Booking Details</th>
-                                    {{-- <th>Start Date</th>
-                                    <th>End Date</th> --}}
-                                    {{-- <th>Travelers</th> --}}
                                     <th>Budget</th>
                                     <th>Interests</th>
                                     <th>Accommodation</th>
-                                    <th>Pace</th>
+                                    <th>Travel Pace</th>
                                     <th>Notes</th>
                                     <th>Actions</th>
                                 </tr>
@@ -41,7 +37,12 @@
 
                                         <td>
                                             <div>{{ $enquiry->name }}</div>
-                                            <div class="text-secondary">{{ $enquiry->email }}</div>
+                                            <div class="text-secondary text-nowrap"><i class="bx bx-envelope"></i>
+                                                {{ $enquiry->email }}
+                                            </div>
+                                            <div class="text-secondary text-nowrap"><i class="bx bx-phone"></i>
+                                                {{ $enquiry->contact_no }}
+                                            </div>
                                         </td>
 
                                         {{-- <td>{{ $enquiry->email }}</td> --}}
