@@ -29,9 +29,10 @@ class EnquiryController extends Controller
         $enquiry->message = $request->message;
         $enquiry->save();
 
-        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new EnquiryMail($request->all()));
+        Mail::to($this->site->email)->send(new EnquiryMail($request->all()));
 
         return response()->json([
+            'success' => true,
             'message' => 'Details has been sent, We will contact you shortly.',
             // 'whatsapp' => $whatsapp
         ]);

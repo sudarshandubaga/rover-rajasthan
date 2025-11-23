@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BookingEnquiryController;
 use App\Http\Controllers\CabController;
 use App\Http\Controllers\CabServiceController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\CustomizeTourEnquiryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiryController as ControllersEnquiryController;
 use App\Http\Controllers\FaqController;
@@ -36,6 +38,9 @@ Route::group([
 
         Route::post('/cab-service/{cabService}/details', [CabServiceController::class, 'updateDetails'])->name('cab-service.details');
 
+        Route::resource('/booking-enquiry', BookingEnquiryController::class)->only(['index', 'destroy']);
+        Route::resource('/customize-tour-enquiry', CustomizeTourEnquiryController::class)->only(['index', 'destroy']);
+
         Route::resources([
             'slider'            => SliderController::class,
             'city'              => CityController::class,
@@ -52,8 +57,9 @@ Route::group([
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/enquiry-submit', [ControllersEnquiryController::class, 'store'])->name('enquiry.submit');
-Route::post('/customize-tour', [PageController::class, 'storeTourEnquiry'])->name('customize-tour.submit');
+Route::post('/customize-tour', [CustomizeTourEnquiryController::class, 'store'])->name('customize-tour.store');
 Route::get('/tours/{tourPackage}', [TourPackageController::class, 'show'])->name('tour.show');
 Route::get('/cab-service/{cabService}', [WebCabServiceController::class, 'show'])->name('cab-service.show');
 Route::resource('/blog', BlogController::class)->only(['show']);
+Route::resource('/booking-enquiry', BookingEnquiryController::class)->only(['store']);
 Route::get('{page}', [PageController::class, 'show'])->name('page.show');

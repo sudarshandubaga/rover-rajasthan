@@ -22,7 +22,7 @@
     {{-- Banner Slider Section End --}}
 
     <!-- Booking Form Section (Updated Form Fields for City Travel) -->
-    <section id="booking-form" class="relative -mt-16 lg:-mt-24 z-20 container mx-auto px-4">
+    {{-- <section id="booking-form" class="relative -mt-16 lg:-mt-24 z-20 container mx-auto px-4">
         <div class="bg-white rounded-xl shadow-2xl p-6 lg:p-8">
             <div class="flex gap-4 mb-4">
                 <button class="trip-tab bg-roberto-teal text-white px-4 py-2 rounded-lg border shadow"
@@ -85,7 +85,9 @@
                 </button>
             </div>
         </div>
-    </section>
+    </section> --}}
+
+    <x-booking-form />
 
     <!-- About Section -->
     <section id="about" class="container mx-auto px-4 py-16 md:py-24">
@@ -138,46 +140,6 @@
                 <span class="text-xs font-bold uppercase text-roberto-teal tracking-widest">TAXI</span>
                 <h2 class="text-4xl font-bold text-roberto-dark mt-2">Vehicles We Offer</h2>
             </div>
-            {{-- <div class="grid grid-cols-1 lg:grid-cols-2 bg-white shadow-xl rounded-xl overflow-hidden">
-                <!-- Tour Image (Updated with real-looking image) -->
-                <div class="h-80 lg:h-auto">
-                    <img src="{{ asset('images/Taj_Mahal.webp') }}" alt="Taj Mahal Agra"
-                        class="w-full h-full object-cover" />
-                </div>
-
-                <!-- Tour Details -->
-                <div class="p-8 md:p-12 bg-roberto-dark text-white space-y-6">
-                    <span class="text-xs font-bold uppercase text-roberto-teal tracking-widest">FEATURED ROUTE</span>
-                    <h3 class="text-4xl font-bold">Golden Triangle Express</h3>
-
-                    <div class="flex items-center space-x-4">
-                        <span class="text-5xl font-extrabold text-roberto-teal">₹15,000</span>
-                        <span class="text-sm text-white/70">/ Per Vehicle (Sedan)</span>
-                    </div>
-
-                    <p class="text-white/80 leading-relaxed">
-                        A classic 5-day route covering Delhi, Agra, and Jaipur. Enjoy private air-conditioned transport and
-                        professional drivers for a smooth journey between the historic gems of North India. Price includes
-                        all tolls and taxes.
-                    </p>
-
-                    <ul class="grid grid-cols-2 gap-2 text-sm text-white/80">
-                        <li class="flex items-center"><i data-lucide="map" class="w-4 h-4 mr-2 text-roberto-teal"></i> Delhi
-                            to Agra (and back)</li>
-                        <li class="flex items-center"><i data-lucide="car" class="w-4 h-4 mr-2 text-roberto-teal"></i>
-                            Dedicated AC Sedan</li>
-                        <li class="flex items-center"><i data-lucide="coffee" class="w-4 h-4 mr-2 text-roberto-teal"></i>
-                            Stops at Highway Dhabas</li>
-                        <li class="flex items-center"><i data-lucide="badge-check"
-                                class="w-4 h-4 mr-2 text-roberto-teal"></i> All Tolls & Fees Included</li>
-                    </ul>
-
-                    <a href="#booking-form"
-                        class="inline-block bg-roberto-teal text-roberto-dark font-bold py-3 px-8 rounded-full shadow-lg hover:bg-teal-400 transition duration-300 mt-4">
-                        Book This Package
-                    </a>
-                </div>
-            </div> --}}
 
             <div class="grid grid-cols-2 lg:grid-cols-3 gap-5">
                 @foreach ($cabs as $cab)
@@ -380,33 +342,4 @@
 @endsection
 
 @push('extra_scripts')
-    <script>
-        $(document).ready(function() {
-            function setActiveTab(trip) {
-                $(".trip-tab").removeClass("bg-roberto-teal text-white").addClass("bg-white text-gray-600");
-                $('.trip-tab[data-trip="' + trip + '"]').removeClass("bg-white text-gray-600").addClass(
-                    "bg-roberto-teal text-white");
-            }
-
-            function updateFormFields(trip) {
-                if (trip === "local") {
-                    $("#destination-wrapper").hide();
-                } else {
-                    $("#destination-wrapper").show();
-                }
-            }
-
-            // default
-            let currentTrip = "local";
-            setActiveTab(currentTrip);
-            updateFormFields(currentTrip);
-
-            // on tab click
-            $(".trip-tab").on("click", function() {
-                let trip = $(this).data("trip");
-                setActiveTab(trip);
-                updateFormFields(trip);
-            });
-        });
-    </script>
 @endpush

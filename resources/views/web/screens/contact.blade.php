@@ -54,8 +54,10 @@
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
-                        <button type="submit" class="bg-orange-600 text-white px-4 py-2 rounded">Send Message <i
-                                class="bi bi-chevron-right"></i></button>
+                        <button type="submit" id="submitBtn" class="bg-orange-600 text-white px-4 py-2 rounded">
+                            Send Message <i class="bi bi-chevron-right"></i>
+                        </button>
+
                     </form>
                 </div>
                 <div>
@@ -98,13 +100,20 @@
             </div>
         </div>
     </section>
+@endsection
+
+@push('extra_scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('enquiryForm');
+            const submitBtn = document.getElementById('submitBtn');
+
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
                 event.stopPropagation();
+
                 let isValid = true;
 
                 const name = document.getElementById('name');
@@ -140,31 +149,60 @@
                     document.getElementById('messageError').classList.add('hidden');
                 }
 
-                if (isValid) {
-                    const formData = new FormData(form);
-                    fetch(form.action, {
-                            method: 'POST',
-                            body: formData,
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                    .getAttribute('content')
-                            }
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                alert('Message sent successfully!');
-                                form.reset();
-                            } else {
-                                alert('An error occurred. Please try again.');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('An error occurred. Please try again.');
+                if (!isValid) return;
+
+                // 🔵 Disable button + show loading text
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `Sending... <i class="bi bi-arrow-repeat animate-spin"></i>`;
+                submitBtn.classList.add("opacity-60");
+
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content')
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Restore button state
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = `Send Message <i class="bi bi-chevron-right"></i>`;
+                        submitBtn.classList.remove("opacity-60");
+
+                        if (data.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Message sent successfully!'
+                            });
+
+                            form.reset();
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'An error occurred. Please try again.'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = `Send Message <i class="bi bi-chevron-right"></i>`;
+                        submitBtn.classList.remove("opacity-60");
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An unexpected error occurred. Please try again.'
                         });
-                }
+                    });
             }, false);
         });
     </script>
-@endsection
+@endpush

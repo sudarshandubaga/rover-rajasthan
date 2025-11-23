@@ -127,6 +127,18 @@ class AdminMenuSeeder extends Seeder
             'route_name' => 'admin.enquiry.index',
         ]);
 
+        $this->addRow([
+            'label' => 'Booking Enquiry',
+            'icon'  => 'bx bx-phone',
+            'route_name' => 'admin.booking-enquiry.index',
+        ]);
+
+        $this->addRow([
+            'label' => 'Customized Tour Enquiry',
+            'icon'  => 'bx bx-phone',
+            'route_name' => 'admin.customize-tour-enquiry.index',
+        ]);
+
         AdminMenu::insert($this->data);
     }
 

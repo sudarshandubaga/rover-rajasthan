@@ -56,7 +56,7 @@
             <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
                 <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Tell Us Your Travel Plans</h2>
 
-                <form action="{{ route('customize-tour.submit') }}" method="POST"
+                <form action="{{ route('customize-tour.store') }}" method="POST"
                     class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @csrf
 
