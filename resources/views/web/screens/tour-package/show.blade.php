@@ -9,7 +9,8 @@
                 <div class="lg:col-span-2">
                     <h2 class="text-3xl font-bold text-slate-800 mb-4">Tour Overview</h2>
                     <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-                        {{ $tourPackage->long_description ?? $tourPackage->description }}</p>
+                        {!! $tourPackage->long_description ?? $tourPackage->description !!}
+                    </p>
 
                     {{-- Itinerary --}}
                     @if (!empty($tourPackage->itinerary))
