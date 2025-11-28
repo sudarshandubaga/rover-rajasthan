@@ -254,24 +254,40 @@
                 $(this).closest('.exclusion-item').remove();
             });
 
+            function reindexItinerary() {
+                $('#itinerary-wrapper .itinerary-item').each(function(index) {
+                    $(this).find('input[name^="itinerary"]').each(function() {
+                        if ($(this).attr('name').includes('day')) {
+                            $(this).attr('name', `itinerary[${index}][day]`);
+                        }
+                        if ($(this).attr('name').includes('description')) {
+                            $(this).attr('name', `itinerary[${index}][description]`);
+                        }
+                    });
+                });
+            }
+
+
 
             /* ---------------------------
                Add Itinerary Field
             ---------------------------- */
             $('#add-itinerary').on('click', function() {
                 $('#itinerary-wrapper').append(`
-            <div class="row mb-2 itinerary-item">
-                <div class="col-sm-3">
-                    <input type="text" name="itinerary[][day]" class="form-control" placeholder="Day / Time">
-                </div>
-                <div class="col-sm-8">
-                    <input type="text" name="itinerary[][description]" class="form-control" placeholder="Description">
-                </div>
-                <div class="col-sm-1">
-                    <button type="button" class="btn btn-danger remove-itinerary">X</button>
-                </div>
-            </div>
-        `);
+                    <div class="row mb-2 itinerary-item">
+                        <div class="col-sm-3">
+                            <input type="text" name="itinerary[][day]" class="form-control" placeholder="Day / Time">
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" name="itinerary[][description]" class="form-control" placeholder="Description">
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="button" class="btn btn-danger remove-itinerary">X</button>
+                        </div>
+                    </div>
+                `);
+
+                reindexItinerary();
             });
 
             /* ---------------------------
@@ -279,6 +295,8 @@
             ---------------------------- */
             $(document).on('click', '.remove-itinerary', function() {
                 $(this).closest('.itinerary-item').remove();
+
+                reindexItinerary();
             });
 
         });
