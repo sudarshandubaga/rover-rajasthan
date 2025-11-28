@@ -127,15 +127,15 @@
                         $itinerary = old('itinerary', @$tour->itinerary ?? []);
                     @endphp
 
-                    @foreach ($itinerary as $item)
+                    @foreach ($itinerary as $index => $item)
                         <div class="row mb-2 itinerary-item">
                             <div class="col-sm-3">
-                                <input type="text" name="itinerary[][day]" class="form-control"
+                                <input type="text" name="itinerary[{{ $index }}][day]" class="form-control"
                                     placeholder="Day / Time" value="{{ @$item['day'] }}">
                             </div>
                             <div class="col-sm-8">
-                                <input type="text" name="itinerary[][description]" class="form-control"
-                                    placeholder="Description" value="{{ @$item['description'] }}">
+                                <input type="text" name="itinerary[{{ $index }}][description]"
+                                    class="form-control" placeholder="Description" value="{{ @$item['description'] }}">
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" class="btn btn-danger remove-itinerary">X</button>
