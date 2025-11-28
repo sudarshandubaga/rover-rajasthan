@@ -29,7 +29,7 @@ class TourPackageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'            => 'required|string|max:255',
+            'name'            => 'required|string|max:255|unique:tour_packages,name',
             'type'            => 'required|string',
             'description'     => 'nullable|string',
             'long_description' => 'nullable|string',
@@ -97,7 +97,7 @@ class TourPackageController extends Controller
     public function update(Request $request, TourPackage $tourPackage)
     {
         $request->validate([
-            'name'            => 'required|string|max:255',
+            'name'            => 'required|string|max:255|unique:tour_packages,name,' . $tourPackage->id,
             'type'            => 'required|string',
             'description'     => 'nullable|string',
             'long_description' => 'nullable|string',
@@ -138,10 +138,6 @@ class TourPackageController extends Controller
             $tourPackage->image_url = dataUriToImage($request->image, "tourPackages");
         }
 
-        $tourPackage->save();
-
-        // Add encoded ID to slug again
-        $tourPackage->slug .= "-" . base64_encode($tourPackage->id);
         $tourPackage->save();
 
         return redirect()
