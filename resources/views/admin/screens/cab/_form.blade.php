@@ -24,6 +24,11 @@
                             <input type="text" id="fare" name="fare" class="form-control"
                                 placeholder="Enter fare" value="{{ old('fare') }}" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="description" id="description" class="form-control text-editor" placeholder="Enter description"
+                                rows="15">{{ old('description') }}</textarea>
+                        </div>
 
                         <x-seo-detail />
                     </div>
