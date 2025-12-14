@@ -98,8 +98,13 @@ class CabController extends Controller
 
         if (!empty($request->image)) {
             if (!empty($cab->image)) {
-                unlink(public_path() . "/storage/" . $cab->getRawOriginal('image'));
+                $path = public_path() . '/storage/' . $cab->getRawOriginal('image');
+
+                if (file_exists($path)) {
+                    unlink($path);
+                }
             }
+
             $cab->image = dataUriToImage($request->image, "cabs");
         }
 
@@ -114,8 +119,13 @@ class CabController extends Controller
     public function destroy(Cab $cab)
     {
         if (!empty($cab->image)) {
-            unlink(public_path() . "/storage/" . $cab->getRawOriginal('image'));
+            $path = public_path() . '/storage/' . $cab->getRawOriginal('image');
+
+            if (file_exists($path)) {
+                unlink($path);
+            }
         }
+
         $cab->delete();
 
         return redirect()->back()->with("success", "Success! Cab has been deleted.");
