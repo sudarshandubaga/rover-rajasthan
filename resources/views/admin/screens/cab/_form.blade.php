@@ -25,7 +25,7 @@
                                 placeholder="Enter fare" value="{{ old('fare') }}" required>
                         </div>
 
-                        <x-seo-details />
+                        <x-seo-detail />
                     </div>
                 </div>
             </div>
