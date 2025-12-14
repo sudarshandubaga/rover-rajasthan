@@ -34,13 +34,20 @@ class CabController extends Controller
         $request->validate([
             'vehicle_type'  => 'required|unique:cabs,vehicle_type',
             'capacity'      => 'required|string',
-            'fare'          => 'required|numeric'
+            'fare'          => 'required|numeric',
+            'regular_fare' => 'required|numeric|lt:fare'
         ]);
 
         $cab = new Cab();
         $cab->vehicle_type = $request->vehicle_type;
+        $cab->slug = Str::slug($request->vehicle_type, '-');
         $cab->capacity = $request->capacity;
+        $cab->regular_fare = $request->regular_fare;
         $cab->fare = $request->fare;
+        $cab->description = $request->description;
+        $cab->seo_title = $request->seo_title;
+        $cab->seo_keywords = $request->seo_keywords;
+        $cab->seo_description = $request->seo_description;
 
         if (!empty($request->image)) {
             $cab->image = dataUriToImage($request->image, "cabs");
@@ -56,7 +63,8 @@ class CabController extends Controller
      */
     public function show(Cab $cab)
     {
-        //
+        $page = $cab;
+        return view('web.screens.cab.show', compact('cab', 'page'));
     }
 
     public function edit(Cab $cab)
@@ -79,8 +87,14 @@ class CabController extends Controller
         ]);
 
         $cab->vehicle_type = $request->vehicle_type;
+        $cab->slug = Str::slug($request->vehicle_type, '-');
         $cab->capacity = $request->capacity;
+        $cab->regular_fare = $request->regular_fare;
         $cab->fare = $request->fare;
+        $cab->description = $request->description;
+        $cab->seo_title = $request->seo_title;
+        $cab->seo_keywords = $request->seo_keywords;
+        $cab->seo_description = $request->seo_description;
 
         if (!empty($request->image)) {
             if (!empty($cab->image)) {

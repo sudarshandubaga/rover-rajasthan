@@ -15,10 +15,17 @@
                                 placeholder="Enter capacity" value="{{ old('capacity') }}" required>
                         </div>
                         <div class="mb-3">
+                            <label for="regular_fare" class="form-label">Regular Fare (Per Km)</label>
+                            <input type="text" id="regular_fare" name="regular_fare" class="form-control"
+                                placeholder="Enter regular fare" value="{{ old('regular_fare') }}" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="fare" class="form-label">Fare (Per Km)</label>
                             <input type="text" id="fare" name="fare" class="form-control"
                                 placeholder="Enter fare" value="{{ old('fare') }}" required>
                         </div>
+
+                        <x-seo-details />
                     </div>
                 </div>
             </div>

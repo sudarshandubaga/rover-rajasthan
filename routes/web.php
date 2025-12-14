@@ -61,5 +61,6 @@ Route::post('/customize-tour', [CustomizeTourEnquiryController::class, 'store'])
 Route::get('/tours/{tourPackage}', [TourPackageController::class, 'show'])->name('tour.show');
 Route::get('/cab-service/{cabService}', [WebCabServiceController::class, 'show'])->name('cab-service.show');
 Route::resource('/blog', BlogController::class)->only(['show']);
+Route::resource('/cab', CabController::class)->only(['show']);
 Route::resource('/booking-enquiry', BookingEnquiryController::class)->only(['store']);
 Route::get('{page}', [PageController::class, 'show'])->name('page.show');

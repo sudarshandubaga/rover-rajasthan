@@ -21,72 +21,6 @@
     </section>
     {{-- Banner Slider Section End --}}
 
-    <!-- Booking Form Section (Updated Form Fields for City Travel) -->
-    {{-- <section id="booking-form" class="relative -mt-16 lg:-mt-24 z-20 container mx-auto px-4">
-        <div class="bg-white rounded-xl shadow-2xl p-6 lg:p-8">
-            <div class="flex gap-4 mb-4">
-                <button class="trip-tab bg-roberto-teal text-white px-4 py-2 rounded-lg border shadow"
-                    data-trip="local">Local Trip</button>
-                <button class="trip-tab bg-white text-gray-600 px-4 py-2 rounded-lg border shadow" data-trip="oneway">One
-                    Way Trip</button>
-                <button class="trip-tab bg-white text-gray-600 px-4 py-2 rounded-lg border shadow" data-trip="round">Round
-                    Trip</button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
-                <!-- Dropdowns (Modified for Source/Destination City) -->
-                <div class="space-y-1">
-                    <label class="block text-xs font-semibold uppercase text-gray-500" for="source_city">Source City</label>
-                    <x-select-dropdown id="source_city" required>
-                        <option value="">--select--</option>
-                        @foreach ($cities as $id => $name)
-                            <option value="{{ $id }}">{{ $name }}</option>
-                        @endforeach
-                    </x-select-dropdown>
-                </div>
-                <!-- Destination City -->
-                <div class="space-y-1" id="destination-wrapper">
-                    <label class="block text-xs font-semibold uppercase text-gray-500" for="destination_city">
-                        Destination City
-                    </label>
-                    <x-select-dropdown id="destination_city" required>
-                        <option value="">--select--</option>
-                        @foreach ($cities as $id => $name)
-                            <option value="{{ $id }}">{{ $name }}</option>
-                        @endforeach
-                    </x-select-dropdown>
-                </div>
-
-                <div class="space-y-1">
-                    <label class="block text-xs font-semibold uppercase text-gray-500">Travel Date</label>
-                    <input type="date" value="2026-06-15"
-                        class="w-full border border-gray-300 rounded-lg p-3 focus:ring-roberto-teal focus:border-roberto-teal" />
-                </div>
-                <div class="space-y-1">
-                    <label class="block text-xs font-semibold uppercase text-gray-500" for="contact_no">Contact No.</label>
-                    <input type="tel" value="" id="contact_no" placeholder="Contact No."
-                        class="w-full border border-gray-300 rounded-lg p-3 focus:ring-roberto-teal focus:border-roberto-teal" />
-                </div>
-                <div class="space-y-1">
-                    <label class="block text-xs font-semibold uppercase text-gray-500">Vehicle Type</label>
-                    <x-select-dropdown>
-                        <option value="">--select--</option>
-                        @foreach ($cabs as $cab)
-                            <option value="{{ $cab->id }}">{{ $cab->vehicle_type }} ({{ $cab->capacity }} Seater)
-                            </option>
-                        @endforeach
-                    </x-select-dropdown>
-                </div>
-
-                <!-- Search Button -->
-                <button
-                    class="lg:col-span-1 mt-6 lg:mt-0 bg-roberto-teal text-white font-bold text-lg rounded-lg py-3 px-6 hover:bg-teal-400 transition duration-300 shadow-md">
-                    FIND TRANSFERS
-                </button>
-            </div>
-        </div>
-    </section> --}}
-
     <x-booking-form />
 
     <!-- About Section -->
@@ -136,34 +70,67 @@
     <!-- Tour Package Showcase Section -->
     <section id="tours" class="bg-gray-100 py-16 md:py-24">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <span class="text-xs font-bold uppercase text-roberto-teal tracking-widest">TAXI</span>
-                <h2 class="text-4xl font-bold text-roberto-dark mt-2">Vehicles We Offer</h2>
+            <!-- Heading -->
+            <div class="text-center mb-14">
+                <span class="text-xs font-bold uppercase text-roberto-teal tracking-widest">Taxi</span>
+                <h2 class="text-4xl font-extrabold text-roberto-dark mt-2">
+                    Vehicles We Offer
+                </h2>
+                <p class="text-gray-500 mt-3 max-w-xl mx-auto">
+                    Choose from our wide range of comfortable and reliable vehicles
+                </p>
             </div>
 
-            <div class="grid grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($cabs as $cab)
-                    <div class="bg-white p-5 rounded-lg">
-                        <div class="image">
-                            <img src="{{ $cab->image }}" alt="{{ $cab->vehicle_type }}" class="w-full aspect-video">
-                        </div>
-                        <div class="flex justify-between items-center mt-5">
-                            <div>
-                                <h4 class="text-orange-500 font-bold text-lg">{{ $cab->vehicle_type }}</h4>
+                    <a href="{{ route('cab.show', $cab) }}"
+                        class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
 
-                                <div class="text-gray-400">
-                                    {{ $cab->capacity }} Seater
+                        <!-- Image -->
+                        <div class="relative overflow-hidden">
+                            <img src="{{ $cab->image }}" alt="{{ $cab->vehicle_type }}"
+                                class="w-full p-3 object-cover transform group-hover:scale-110 transition-transform duration-500">
+
+
+                        </div>
+
+                        <!-- Content -->
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-roberto-dark group-hover:text-orange-500 transition-colors">
+                                {{ $cab->vehicle_type }}
+                            </h4>
+
+                            <div class="flex items-center justify-between mt-4">
+                                <span class="text-gray-500 text-sm">
+                                    🚗 {{ $cab->capacity }} Seater
+                                </span>
+
+                                <div class="">
+                                    <div class="text-lg">
+                                    </div>
+                                    <div>
+                                        <del class="text-sm text-gray-700">&nbsp;₹{{ $cab->regular_fare ?: $cab->fare }} /
+                                            km&nbsp;</del>
+                                        <span class="text-orange-500 text-3xl font-bold">₹{{ $cab->fare }} / km</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="font-bold text-3xl">
-                                ₹{{ $cab->fare }} / km
-                            </div>
                         </div>
-                    </div>
+
+                        <!-- Hover CTA -->
+                        <div class="opacity-50 group-hover:opacity-100 transition-opacity duration-300 px-6 pb-6 mb-6">
+                            <button
+                                class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg font-semibold transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </a>
                 @endforeach
             </div>
         </div>
     </section>
+
 
     <!-- Guest Testimonial Section (Converted to Swiper Slider) -->
     <section class="py-16 md:py-24">
