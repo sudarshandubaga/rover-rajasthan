@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiryController as ControllersEnquiryController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\PageController as ControllersPageController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SliderController;
@@ -40,6 +41,7 @@ Route::group([
 
         Route::resource('/booking-enquiry', BookingEnquiryController::class)->only(['index', 'destroy']);
         Route::resource('/customize-tour-enquiry', CustomizeTourEnquiryController::class)->only(['index', 'destroy']);
+        Route::resource('/media', MediaController::class)->only(['index', 'store', 'destroy']);
 
         Route::resources([
             'slider'            => SliderController::class,

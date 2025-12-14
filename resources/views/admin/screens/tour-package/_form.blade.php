@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                {{-- <hr>
+                <hr>
                 <h5>Gallery Images</h5>
 
                 <div id="gallery-wrapper">
@@ -70,16 +70,54 @@
                         $gallery = old('gallery', @$tour->gallery ?? []);
                     @endphp
 
-                    @foreach ($gallery as $index => $img)
-                        <div class="mb-2 d-flex gap-2 align-items-center gallery-item">
-                            <input type="text" name="gallery[]" class="form-control" value="{{ $img }}"
-                                placeholder="Enter image URL">
-                            <button type="button" class="btn btn-danger remove-gallery">X</button>
-                        </div>
-                    @endforeach
+                    <div class="row">
+                        @foreach ($gallery as $index => $img)
+                            <div class="col-lg-2 gallery-item col-4">
+                                <div class="mb-2 d-flex gap-2 align-items-center position-relative">
+                                    <input type="hidden" name="gallery[]" class="form-control"
+                                        value="{{ $img }}" placeholder="Enter image URL">
+                                    <img src="{{ $img }}" alt="" class="w-100 rounded border">
+                                    <button type="button"
+                                        class="btn btn-link text-danger btn-sm remove-gallery position-absolute"
+                                        style="top: -8px; right: -32px">
+                                        <i class="bx bx-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
                 </div>
 
-                <button type="button" class="btn btn-primary mt-2" id="add-gallery">Add Image</button> --}}
+                {{-- <button type="button" class="btn btn-primary mt-2" id="add-gallery">Add Image</button> --}}
+                <button type="button" class="btn btn-primary mt-2" id="open-media">
+                    Add Image
+                </button>
+
+
+                <!-- Media Library Modal -->
+                <div class="modal fade" id="mediaModal" tabindex="-1">
+                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Media Library</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <x-upload-media-image :width="800" :height="600" />
+
+                                <div class="row" id="media-container">
+                                    <div class="text-center w-100 py-5" id="media-loading">
+                                        Loading images...
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
                 <hr>
                 <h5>Inclusions</h5>
@@ -110,8 +148,8 @@
 
                     @foreach ($exclusions as $exc)
                         <div class="mb-2 d-flex gap-2 align-items-center exclusion-item">
-                            <input type="text" name="exclusions[]" class="form-control" value="{{ $exc }}"
-                                placeholder="Enter exclusion">
+                            <input type="text" name="exclusions[]" class="form-control"
+                                value="{{ $exc }}" placeholder="Enter exclusion">
                             <button type="button" class="btn btn-danger remove-exclusion">X</button>
                         </div>
                     @endforeach
@@ -130,12 +168,13 @@
                     @foreach ($itinerary as $index => $item)
                         <div class="row mb-2 itinerary-item">
                             <div class="col-sm-3">
-                                <input type="text" name="itinerary[{{ $index }}][day]" class="form-control"
-                                    placeholder="Day / Time" value="{{ @$item['day'] }}">
+                                <input type="text" name="itinerary[{{ $index }}][day]"
+                                    class="form-control" placeholder="Day / Time" value="{{ @$item['day'] }}">
                             </div>
                             <div class="col-sm-8">
                                 <input type="text" name="itinerary[{{ $index }}][description]"
-                                    class="form-control" placeholder="Description" value="{{ @$item['description'] }}">
+                                    class="form-control" placeholder="Description"
+                                    value="{{ @$item['description'] }}">
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" class="btn btn-danger remove-itinerary">X</button>
@@ -192,6 +231,89 @@
 </div>
 
 @push('extra_scripts')
+    <script>
+        $(document).ready(function() {
+
+            /* ----------------------
+               Open Media Modal
+            ----------------------- */
+            $('#open-media').on('click', function() {
+                $('#mediaModal').modal('show');
+                fetchMedia();
+            });
+
+            /* ----------------------
+               Fetch Media via API
+            ----------------------- */
+            function fetchMedia() {
+                $('#media-container').html(`
+            <div class="text-center w-100 py-5">Loading images...</div>
+        `);
+
+                $.ajax({
+                    url: "{{ route('admin.media.index') }}",
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.status) {
+                            let html = '';
+
+                            response.data.forEach(item => {
+                                html += `
+                            <div class="col-lg-2 col-md-3 col-4 mb-3">
+                                <div class="media-item border rounded p-1 cursor-pointer"
+                                     data-image="${item.url}">
+                                    <img src="${item.url}" class="img-fluid rounded">
+                                </div>
+                            </div>
+                        `;
+                            });
+
+                            $('#media-container').html(html);
+                        }
+                    }
+                });
+            }
+
+            /* ----------------------
+               Select Image
+            ----------------------- */
+            $(document).on('click', '.media-item', function() {
+                let imageUrl = $(this).data('image');
+
+                // Prevent duplicates
+                if ($(`input[name="gallery[]"][value="${imageUrl}"]`).length) {
+                    alert('Image already added');
+                    return;
+                }
+
+                $('#gallery-wrapper .row').append(`
+            <div class="col-lg-2 gallery-item col-4">
+                <div class="mb-2 d-flex gap-2 align-items-center position-relative">
+                    <input type="hidden" name="gallery[]" value="${imageUrl}">
+                    <img src="${imageUrl}" class="w-100 rounded border">
+                    <button type="button"
+                        class="btn btn-link text-danger btn-sm remove-gallery position-absolute"
+                        style="top:-8px; right:-32px">
+                        <i class="bx bx-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `);
+
+                $('#mediaModal').modal('hide');
+            });
+
+            /* ----------------------
+               Remove Gallery
+            ----------------------- */
+            $(document).on('click', '.remove-gallery', function() {
+                $(this).closest('.gallery-item').remove();
+            });
+
+        });
+    </script>
+
+
     <script>
         $(document).ready(function() {
 

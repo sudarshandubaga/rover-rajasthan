@@ -35,7 +35,7 @@ class TourPackageController extends Controller
             'long_description' => 'nullable|string',
             'price'           => 'nullable|string',
             'duration'        => 'nullable|string',
-            // 'gallery'         => 'array',
+            'gallery'         => 'array',
             'inclusions'      => 'array',
             'exclusions'      => 'array',
             'itinerary'       => 'array',
@@ -52,7 +52,7 @@ class TourPackageController extends Controller
         $tourPackage->duration = $request->duration;
 
         // Arrays – Gallery, Inclusions, Exclusions, Itinerary
-        // $tourPackage->gallery = $request->gallery ?? [];
+        $tourPackage->gallery = $request->gallery ?? [];
         $tourPackage->inclusions = $request->inclusions ?? [];
         $tourPackage->exclusions = $request->exclusions ?? [];
         $tourPackage->itinerary = $request->itinerary ?? [];
@@ -103,7 +103,7 @@ class TourPackageController extends Controller
             'long_description' => 'nullable|string',
             'price'           => 'nullable|string',
             'duration'        => 'nullable|string',
-            // 'gallery'         => 'array',
+            'gallery'         => 'array',
             'inclusions'      => 'array',
             'exclusions'      => 'array',
             'itinerary'       => 'array',
@@ -118,7 +118,7 @@ class TourPackageController extends Controller
         $tourPackage->duration = $request->duration;
 
         // Arrays
-        // $tourPackage->gallery = $request->gallery ?? [];
+        $tourPackage->gallery = $request->gallery ?? [];
         $tourPackage->inclusions = $request->inclusions ?? [];
         $tourPackage->exclusions = $request->exclusions ?? [];
         $tourPackage->itinerary = $request->itinerary ?? [];
