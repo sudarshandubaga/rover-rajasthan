@@ -97,7 +97,7 @@ class CabController extends Controller
         $cab->seo_description = $request->seo_description;
 
         if (!empty($request->image)) {
-            if (!empty($cab->image)) {
+            if (!empty($cab->getRawOriginal('image'))) {
                 $path = public_path() . '/storage/' . $cab->getRawOriginal('image');
 
                 if (file_exists($path)) {
@@ -118,7 +118,7 @@ class CabController extends Controller
      */
     public function destroy(Cab $cab)
     {
-        if (!empty($cab->image)) {
+        if (!empty($cab->getRawOriginal('image'))) {
             $path = public_path() . '/storage/' . $cab->getRawOriginal('image');
 
             if (file_exists($path)) {
