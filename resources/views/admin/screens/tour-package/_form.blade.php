@@ -72,9 +72,9 @@
 
                     <div class="row">
                         @if (!empty($gallery))
-                            @foreach ($gallery as $index => $img)
-                                <div class="col-lg-2 gallery-item col-4">
-                                    <div class="mb-2 d-flex gap-2 align-items-center position-relative">
+                        @foreach ($gallery as $index => $img)
+                            <div class="col-lg-2 gallery-item col-4">
+                                <div class="mb-2 d-flex gap-2 align-items-center position-relative">
                                     <input type="hidden" name="gallery[]" class="form-control"
                                         value="{{ $img }}" placeholder="Enter image URL">
                                     <img src="{{ $img }}" alt="" class="w-100 rounded border">
@@ -86,6 +86,7 @@
                                 </div>
                             </div>
                         @endforeach
+@endif
                     </div>
                 </div>
 
