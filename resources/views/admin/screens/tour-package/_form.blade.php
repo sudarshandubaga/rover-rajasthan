@@ -107,7 +107,7 @@
 
                             <div class="modal-body">
 
-                                <x-upload-media-image :width="800" :height="600" />
+                                <x-upload-media-image name="upload" :width="800" :height="600" />
 
                                 <div class="row" id="media-container">
                                     <div class="text-center w-100 py-5" id="media-loading">
