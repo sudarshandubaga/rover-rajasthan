@@ -72,21 +72,21 @@
 
                     <div class="row">
                         @if (!empty($gallery))
-                        @foreach ($gallery as $index => $img)
-                            <div class="col-lg-2 gallery-item col-4">
-                                <div class="mb-2 d-flex gap-2 align-items-center position-relative">
-                                    <input type="hidden" name="gallery[]" class="form-control"
-                                        value="{{ $img }}" placeholder="Enter image URL">
-                                    <img src="{{ $img }}" alt="" class="w-100 rounded border">
-                                    <button type="button"
-                                        class="btn btn-link text-danger btn-sm remove-gallery position-absolute"
-                                        style="top: -8px; right: -32px">
-                                        <i class="bx bx-trash"></i>
-                                    </button>
+                            @foreach ($gallery as $index => $img)
+                                <div class="col-lg-2 gallery-item col-4">
+                                    <div class="mb-2 d-flex gap-2 align-items-center position-relative">
+                                        <input type="hidden" name="gallery[]" class="form-control"
+                                            value="{{ $img }}" placeholder="Enter image URL">
+                                        <img src="{{ $img }}" alt="" class="w-100 rounded border">
+                                        <button type="button"
+                                            class="btn btn-link text-danger btn-sm remove-gallery position-absolute"
+                                            style="top: -8px; right: -32px">
+                                            <i class="bx bx-trash"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
-@endif
+                            @endforeach
+                        @endif
                     </div>
                 </div>
 
@@ -147,14 +147,15 @@
                     @php
                         $exclusions = old('exclusions', @$tour->exclusions ?? []);
                     @endphp
-
-                    @foreach ($exclusions as $exc)
-                        <div class="mb-2 d-flex gap-2 align-items-center exclusion-item">
-                            <input type="text" name="exclusions[]" class="form-control"
-                                value="{{ $exc }}" placeholder="Enter exclusion">
-                            <button type="button" class="btn btn-danger remove-exclusion">X</button>
-                        </div>
-                    @endforeach
+                    @if (!empty($exclusions))
+                        @foreach ($exclusions as $exc)
+                            <div class="mb-2 d-flex gap-2 align-items-center exclusion-item">
+                                <input type="text" name="exclusions[]" class="form-control"
+                                    value="{{ $exc }}" placeholder="Enter exclusion">
+                                <button type="button" class="btn btn-danger remove-exclusion">X</button>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
 
                 <button type="button" class="btn btn-primary mt-2" id="add-exclusion">Add Exclusion</button>
@@ -166,23 +167,25 @@
                     @php
                         $itinerary = old('itinerary', @$tour->itinerary ?? []);
                     @endphp
-
-                    @foreach ($itinerary as $index => $item)
-                        <div class="row mb-2 itinerary-item">
-                            <div class="col-sm-3">
-                                <input type="text" name="itinerary[{{ $index }}][day]"
-                                    class="form-control" placeholder="Day / Time" value="{{ @$item['day'] }}">
+                    
+                    @if (!empty($itinerary))
+                        @foreach ($itinerary as $index => $item)
+                            <div class="row mb-2 itinerary-item">
+                                <div class="col-sm-3">
+                                    <input type="text" name="itinerary[{{ $index }}][day]"
+                                        class="form-control" placeholder="Day / Time" value="{{ @$item['day'] }}">
+                                </div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="itinerary[{{ $index }}][description]"
+                                        class="form-control" placeholder="Description"
+                                        value="{{ @$item['description'] }}">
+                                </div>
+                                <div class="col-sm-1">
+                                    <button type="button" class="btn btn-danger remove-itinerary">X</button>
+                                </div>
                             </div>
-                            <div class="col-sm-8">
-                                <input type="text" name="itinerary[{{ $index }}][description]"
-                                    class="form-control" placeholder="Description"
-                                    value="{{ @$item['description'] }}">
-                            </div>
-                            <div class="col-sm-1">
-                                <button type="button" class="btn btn-danger remove-itinerary">X</button>
-                            </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
 
                 <button type="button" class="btn btn-primary mt-2" id="add-itinerary">Add Itinerary</button>
