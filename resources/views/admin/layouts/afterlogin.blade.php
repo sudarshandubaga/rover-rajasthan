@@ -22,11 +22,11 @@
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <!-- Search -->
                         <!-- <div class="navbar-nav align-items-center">
-                                                                                                        <div class="nav-item d-flex align-items-center">
-                                                                                                            <i class="bx bx-search fs-4 lh-0"></i>
-                                                                                                            <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
-                                                                                                        </div>
-                                                                                                    </div> -->
+                                                                                                                <div class="nav-item d-flex align-items-center">
+                                                                                                                    <i class="bx bx-search fs-4 lh-0"></i>
+                                                                                                                    <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
+                                                                                                                </div>
+                                                                                                            </div> -->
                         <h1 class="page-title">
                             @yield('title')
                         </h1>
@@ -35,8 +35,8 @@
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
                             <!-- <li class="nav-item lh-1 me-3">
-                                                                                                            <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-                                                                                                        </li> -->
+                                                                                                                    <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+                                                                                                                </li> -->
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -68,24 +68,24 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <!-- <li>
-                                                                                                                    <a class="dropdown-item" href="#">
-                                                                                                                        <i class="bx bx-user me-2"></i>
-                                                                                                                        <span class="align-middle">My Profile</span>
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                                
-                                                                                                                <li>
-                                                                                                                    <a class="dropdown-item" href="#">
-                                                                                                                        <span class="d-flex align-items-center align-middle">
-                                                                                                                            <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                                                                                            <span class="flex-grow-1 align-middle">Billing</span>
-                                                                                                                            <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                                                                                                        </span>
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                                <li>
-                                                                                                                    <div class="dropdown-divider"></div>
-                                                                                                                </li> -->
+                                                                                                                            <a class="dropdown-item" href="#">
+                                                                                                                                <i class="bx bx-user me-2"></i>
+                                                                                                                                <span class="align-middle">My Profile</span>
+                                                                                                                            </a>
+                                                                                                                        </li>
+
+                                                                                                                        <li>
+                                                                                                                            <a class="dropdown-item" href="#">
+                                                                                                                                <span class="d-flex align-items-center align-middle">
+                                                                                                                                    <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                                                                                                                                    <span class="flex-grow-1 align-middle">Billing</span>
+                                                                                                                                    <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                                                                                                                </span>
+                                                                                                                            </a>
+                                                                                                                        </li>
+                                                                                                                        <li>
+                                                                                                                            <div class="dropdown-divider"></div>
+                                                                                                                        </li> -->
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.site.edit') }}">
                                             <i class="bx bx-cog me-2"></i>
@@ -127,13 +127,13 @@
                                 </script>
                             </div>
                             <!-- <div>
-                                        <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                                        <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+                                                <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                                                <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
 
-                                        <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="footer-link me-4">Documentation</a>
+                                                <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="footer-link me-4">Documentation</a>
 
-                                        <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="footer-link me-4">Support</a>
-                                    </div> -->
+                                                <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="footer-link me-4">Support</a>
+                                            </div> -->
                         </div>
                     </footer>
                     <!-- / Footer -->
@@ -166,13 +166,143 @@
         referrerpolicy="origin"></script>
 
     <script>
-        $(function() {
+        $(function () {
             $("select:not(.no_filter)").select2();
         });
-        $(function() {
+        $(function () {
             tinymce.init({
                 selector: '.text-editor',
                 branding: false
+            });
+        });
+    </script>
+@endpush
+
+
+<!-- Include Cropper.js -->
+@push('extra_styles')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+
+    <!-- Styles for Modal -->
+    <style>
+        .crop-modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .crop-modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close-modal {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            right: 10px;
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+@endpush
+
+@push('extra_scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#{{ $name }}_file').on('change', function (event) {
+                let file = event.target.files[0];
+                if (file) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        let imageFileId = event.target.id;
+                        let cropModal = $(`#crop-modal-{{ $name }}`);
+                        let cropImg = $(`#crop-img-{{ $name }}`);
+                        let previewContainer = $(`#preview-container-{{ $name }}`);
+                        let previewImage = $(`#preview-image-{{ $name }}`);
+                        let croppedImageInput = $(`#cropped-image-{{ $name }}`);
+                        let cropActions = $(`#crop-actions-{{ $name }}`);
+
+                        // Show the modal
+                        cropModal.show();
+                        cropImg.attr('src', e.target.result);
+
+                        // Initialize Cropper after image is loaded
+                        cropImg.on('load', function () {
+                            let cropper = new Cropper(cropImg[0], {
+                                aspectRatio: {{ $width }} /
+                                                {{ $height }},
+                                viewMode: 1,
+                                autoCropArea: 1,
+                                crop(event) {
+                                    let canvas = cropper.getCroppedCanvas({
+                                        width: {{ $width }},
+                                        height: {{ $height }}
+                                                });
+                                    previewImage.attr('src', canvas.toDataURL(
+                                        'image/webp'));
+                                }
+                            });
+
+                            // Save button: Update the textarea with the cropped image
+                            $(`#save-cropped-{{ $name }}`).on('click', function () {
+                                let canvas = cropper.getCroppedCanvas({
+                                    width: {{ $width }},
+                                    height: {{ $height }}
+                                            });
+
+                                $(`#drop-zone-{{ $name }} img`).remove();
+                                $(`#drop-zone-{{ $name }}`).append(
+                                    `<img src="${canvas.toDataURL('image/webp')}" />`
+                                );
+
+                                croppedImageInput.val(canvas.toDataURL('image/webp'));
+                                previewImage.attr('src', canvas.toDataURL(
+                                    'image/webp'));
+                                cropModal.hide(); // Close the modal after saving
+                            });
+
+                            // Cancel button: Close the modal and reset everything
+                            $(`#cancel-cropped-{{ $name }}`).on('click', function () {
+                                cropper.destroy();
+                                cropModal.hide();
+                            });
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Close the modal when the "x" button is clicked
+            $('.close-modal').on('click', function () {
+                $(this).closest('.crop-modal').hide();
+            });
+
+            // Close modal if clicked outside of it
+            $(window).on('click', function (event) {
+                if ($(event.target).hasClass('crop-modal')) {
+                    $(event.target).hide();
+                }
             });
         });
     </script>

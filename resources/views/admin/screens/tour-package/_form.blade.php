@@ -226,7 +226,7 @@
                 <div class="mb-3">
                     <label class="form-label">Main Image</label>
 
-                    <x-crop-image name="image" image_file="image_file" width="600" height="400"
+                    <x-crop-image name="image" image_file="image_file" width="600" height="600"
                         image="{{ @$tour->image_url }}" />
                 </div>
 
