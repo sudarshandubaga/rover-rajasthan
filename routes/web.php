@@ -19,7 +19,13 @@ use App\Http\Controllers\Web\CabServiceController as WebCabServiceController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\PageController;
 use App\Http\Controllers\Web\TourPackageController;
+use App\Models\TourPackage;
 use Illuminate\Support\Facades\Route;
+
+Route::get('all-tours', function () {
+    $tours = TourPackage::all();
+    return response()->json($tours->toArray() ?? []);
+});
 
 Route::group([
     'prefix' => 'tour-panel',
@@ -44,15 +50,15 @@ Route::group([
         Route::resource('/media', MediaController::class)->only(['index', 'store', 'destroy']);
 
         Route::resources([
-            'slider'            => SliderController::class,
-            'city'              => CityController::class,
-            'cab'               => CabController::class,
-            'cab-service'       => CabServiceController::class,
-            'faq'               => FaqController::class,
-            'enquiry'           => ControllersEnquiryController::class,
-            'blog'              => BlogController::class,
-            'tour-package'      => ControllersTourPackageController::class,
-            'page'              => ControllersPageController::class,
+            'slider' => SliderController::class,
+            'city' => CityController::class,
+            'cab' => CabController::class,
+            'cab-service' => CabServiceController::class,
+            'faq' => FaqController::class,
+            'enquiry' => ControllersEnquiryController::class,
+            'blog' => BlogController::class,
+            'tour-package' => ControllersTourPackageController::class,
+            'page' => ControllersPageController::class,
         ]);
     });
 });
