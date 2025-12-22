@@ -25,6 +25,20 @@
                         {{ $site->email }}
                     </p>
                 </div>
+
+                {{-- Trust Badges --}}
+                <div class="mt-8 flex flex-wrap gap-3">
+                    <div
+                        class="flex items-center gap-2 px-4 py-1.5 bg-white/5 rounded-lg border border-white/10 transition hover:bg-white/10">
+                        <i class="bi bi-clock-history text-roberto-teal"></i>
+                        <span class="text-[11px] font-bold uppercase tracking-wider">24/7 Availability</span>
+                    </div>
+                    <div
+                        class="flex items-center gap-2 px-4 py-1.5 bg-white/5 rounded-lg border border-white/10 transition hover:bg-white/10">
+                        <i class="bi bi-patch-check-fill text-roberto-teal"></i>
+                        <span class="text-[11px] font-bold uppercase tracking-wider">ISO 9001:2015</span>
+                    </div>
+                </div>
             </div>
 
             {{-- Column 2: Quick Links --}}
@@ -42,7 +56,8 @@
                         <a href="{{ route('page.show', 'blog') }}" class="hover:text-orange-600 transition">Blog</a>
                     </li>
                     <li class="mt-3">
-                        <a href="{{ route('page.show', 'contact-us') }}" class="hover:text-orange-600 transition">Contact
+                        <a href="{{ route('page.show', 'contact-us') }}"
+                            class="hover:text-orange-600 transition">Contact
                             Us</a>
                     </li>
                 </ul>

@@ -35,11 +35,16 @@
                     {!! $about->description !!}
                 </p>
 
-                <!-- Service Icons (Updated for City-to-City Travel) -->
+                <!-- Service Icons (Updated with 24/7 and ISO details) -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center mt-10">
                     <div class="space-y-2">
-                        <i class="bi bi-car-front text-5xl mx-auto text-orange-600"></i>
-                        <p class="text-sm font-semibold">Verified Fleet</p>
+                        <i class="bi bi-patch-check text-5xl mx-auto text-orange-600"></i>
+                        <p class="text-sm font-semibold">ISO 9001:2015</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <i class="bi bi-clock-history text-5xl mx-auto text-orange-600"></i>
+                        <p class="text-sm font-semibold">24/7 Availability</p>
                     </div>
 
                     <div class="space-y-2">
@@ -48,13 +53,8 @@
                     </div>
 
                     <div class="space-y-2">
-                        <i class="bi bi-clock text-5xl mx-auto text-orange-600"></i>
-                        <p class="text-sm font-semibold">Punctual Service</p>
-                    </div>
-
-                    <div class="space-y-2">
-                        <i class="bi bi-map text-5xl mx-auto text-orange-600"></i>
-                        <p class="text-sm font-semibold">Pan-India Routes</p>
+                        <i class="bi bi-car-front text-5xl mx-auto text-orange-600"></i>
+                        <p class="text-sm font-semibold">Verified Fleet</p>
                     </div>
                 </div>
 

@@ -1,20 +1,26 @@
 <!-- Header & Navigation (Updated Branding) -->
 <header class="sticky top-0 z-50 bg-roberto-dark shadow-lg">
-    <div class="container mx-auto flex items-center justify-between">
-        <!-- Logo -->
-        {{-- <a href="{{ route('home') }}" class="text-2xl font-bold text-white uppercase tracking-wider logo">
-            <img src="{{ $site->logo }}" alt="{{ $site->title }}" class="h-14" loading="lazy">
-        </a> --}}
+    <!-- Top Trust Bar -->
+    <div class="bg-black/10 border-b border-white/5 py-1 hidden md:block">
+        <div class="container mx-auto flex justify-end items-center gap-6 text-[10px] uppercase tracking-widest text-white/60 font-bold">
+            <div class="flex items-center gap-2">
+                <i class="bi bi-clock-history text-roberto-teal text-sm"></i>
+                <span>24/7 Availability</span>
+            </div>
+            <div class="flex items-center gap-2 border-l border-white/10 pl-6">
+                <i class="bi bi-patch-check-fill text-roberto-teal text-sm"></i>
+                <span>ISO 9001:2015 Certified</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto flex items-center justify-between py-2 lg:py-0">
         <x-logo />
 
         <!-- Desktop Navigation -->
         <nav class="hidden lg:flex space-x-5 text-lg font-medium text-white/80 relative">
-            {{-- <a href="#home" class="hover:text-roberto-teal transition duration-200">Home</a> --}}
             <a href="{{ route('page.show', 'about-us') }}" class="hover:text-roberto-teal transition duration-200">About
                 Us</a>
-            {{-- <a href="{{ route('page.show', 'cab-services') }}"
-                class="hover:text-roberto-teal transition duration-200">Cab Services</a> --}}
-
             <!-- Day Tours Dropdown -->
             <div class="group relative">
                 <button class="hover:text-roberto-teal transition duration-200 flex items-center gap-1">
@@ -91,7 +97,6 @@
     </div>
 
     <!-- Mobile Navigation -->
-    <!-- Mobile Navigation -->
     <div id="mobile-menu" class="hidden lg:hidden bg-roberto-dark text-white/90">
 
         <a href="{{ route('home') }}" class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">
@@ -148,6 +153,20 @@
             class="block px-6 py-3 border-t border-white/10 hover:bg-roberto-teal/20">
             Contact Us
         </a>
+
+        <!-- Trust Markers in Mobile Menu -->
+        <div class="border-t border-white/10 px-6 py-4 bg-black/10">
+            <div class="flex flex-col gap-3">
+                <div class="flex items-center gap-3 text-sm text-white/70">
+                    <i class="bi bi-clock-history text-roberto-teal"></i>
+                    <span>24/7 Availability</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm text-white/70">
+                    <i class="bi bi-patch-check-fill text-roberto-teal"></i>
+                    <span>ISO 9001:2015 Certified</span>
+                </div>
+            </div>
+        </div>
     </div>
 
 </header>
