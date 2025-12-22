@@ -127,14 +127,15 @@
                     @php
                         $inclusions = old('inclusions', @$tour->inclusions ?? []);
                     @endphp
-
-                    @foreach ($inclusions as $inc)
-                        <div class="mb-2 d-flex gap-2 align-items-center inclusion-item">
-                            <input type="text" name="inclusions[]" class="form-control" value="{{ $inc }}"
-                                placeholder="Enter inclusion">
-                            <button type="button" class="btn btn-danger remove-inclusion">X</button>
-                        </div>
-                    @endforeach
+                    @if (!empty($inclusions))
+                        @foreach ($inclusions as $inc)
+                            <div class="mb-2 d-flex gap-2 align-items-center inclusion-item">
+                                <input type="text" name="inclusions[]" class="form-control" value="{{ $inc }}"
+                                    placeholder="Enter inclusion">
+                                <button type="button" class="btn btn-danger remove-inclusion">X</button>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
 
                 <button type="button" class="btn btn-primary mt-2" id="add-inclusion">Add Inclusion</button>
