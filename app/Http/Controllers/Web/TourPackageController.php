@@ -45,7 +45,9 @@ class TourPackageController extends Controller
             'image' => null
         ];
 
-        return view('web.screens.tour-package.show', compact('tourPackage', 'page'));
+        $relatedTours = TourPackage::where('type', $tourPackage->type)->where('id', '!=', $tourPackage->id)->get();
+
+        return view('web.screens.tour-package.show', compact('tourPackage', 'page', 'relatedTours'));
     }
 
     /**

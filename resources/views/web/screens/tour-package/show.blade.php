@@ -57,8 +57,8 @@
                                         <li class="flex items-start">
                                             <svg class="h-6 w-6 text-red-500 mr-2" fill="none" stroke="currentColor"
                                                 stroke-width="2" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M6 18L18 6M6 6l12 12"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12">
+                                                </path>
                                             </svg>
                                             <span class="text-slate-600">{{ $item }}</span>
                                         </li>
@@ -72,17 +72,21 @@
                 {{-- Sidebar --}}
                 <aside class="lg:sticky top-28 self-start">
                     <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <p class="text-3xl font-bold text-sky-600">
-                            ₹{{ $tourPackage->price }}
-                            <span class="text-lg font-normal text-slate-500">/ person</span>
-                        </p>
-                        <p class="text-slate-600 mt-2">
+                        <p class="text-slate-600 mb-6">
                             <strong>Duration:</strong> {{ $tourPackage->duration ?? 'N/A' }}
                         </p>
-                        <a href="/contact-us"
-                            class="mt-6 w-full text-center block bg-amber-500 text-white font-bold py-3 px-6 rounded-full text-lg hover:bg-amber-600 transition-colors duration-300">
-                            Book This Tour
-                        </a>
+                    </div>
+                    <div class="bg-white p6 rounded shadow-lg mt-16">
+                        @foreach ($relatedTours as $tour)
+                            <a href="{{ route('tour.show', $tour) }}" class="flex items-center gap-4 mb-4">
+                                <img src="{{ $tour->image }}" alt="{{ $tour->name }}"
+                                    class="w-16 h-16 object-cover rounded-full">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-slate-800">{{ $tour->name }}</h3>
+                                    <p class="text-slate-600">{{ $tour->description }}</p>
+                                </div>
+                            </a>
+                        @endforeach
                     </div>
                 </aside>
             </div>
@@ -93,10 +97,10 @@
                     <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Photo Gallery</h2>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         @foreach ($tourPackage->gallery as $img)
-                            <div class="overflow-hidden rounded-lg shadow-md">
+                            <a href="{{ $img }}" data-fancybox="gallery" class="overflow-hidden rounded-lg shadow-md group">
                                 <img src="{{ $img }}" alt="{{ $tourPackage->name }} image"
-                                    class="w-full h-full object-cover aspect-square transform hover:scale-110 transition-transform duration-300" />
-                            </div>
+                                    class="w-full h-full object-cover aspect-square transform group-hover:scale-110 transition-transform duration-300" />
+                            </a>
                         @endforeach
                     </div>
                 </div>
@@ -104,3 +108,16 @@
         </div>
     </section>
 @endsection
+
+@push('extra_styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+@endpush
+
+@push('extra_scripts')
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            // Your custom options
+        });
+    </script>
+@endpush

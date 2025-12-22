@@ -42,6 +42,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
 
     @vite('resources/css/app.css')
+    @stack('extra_styles')
 </head>
 
 <body class="font-sans text-gray-700 antialiased">
