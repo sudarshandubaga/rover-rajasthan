@@ -29,8 +29,8 @@
                                             {{ $key + $tourPackages->firstItem() }}
                                         </td>
                                         <td>
-                                            @if ($tourPackage->image)
-                                                <img src="{{ $tourPackage->image }}" alt="{{ $tourPackage->name }}"
+                                            @if ($tourPackage->image_url)
+                                                <img src="{{ $tourPackage->image_url }}" alt="{{ $tourPackage->name }}"
                                                     class="img img-thumbnail" style="max-height: 48px">
                                             @else
                                                 No Image

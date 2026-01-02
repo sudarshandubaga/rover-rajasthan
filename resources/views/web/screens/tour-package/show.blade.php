@@ -57,7 +57,8 @@
                                         <li class="flex items-start">
                                             <svg class="h-6 w-6 text-red-500 mr-2" fill="none" stroke="currentColor"
                                                 stroke-width="2" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6 18L18 6M6 6l12 12">
                                                 </path>
                                             </svg>
                                             <span class="text-slate-600">{{ $item }}</span>
@@ -79,7 +80,7 @@
                     <div class="bg-white p6 rounded shadow-lg mt-16">
                         @foreach ($relatedTours as $tour)
                             <a href="{{ route('tour.show', $tour) }}" class="flex items-center gap-4 mb-4">
-                                <img src="{{ $tour->image }}" alt="{{ $tour->name }}"
+                                <img src="{{ $tour->image_url }}" alt="{{ $tour->name }}"
                                     class="w-16 h-16 object-cover rounded-full">
                                 <div>
                                     <h3 class="text-lg font-semibold text-slate-800">{{ $tour->name }}</h3>
@@ -97,7 +98,8 @@
                     <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Photo Gallery</h2>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         @foreach ($tourPackage->gallery as $img)
-                            <a href="{{ $img }}" data-fancybox="gallery" class="overflow-hidden rounded-lg shadow-md group">
+                            <a href="{{ $img }}" data-fancybox="gallery"
+                                class="overflow-hidden rounded-lg shadow-md group">
                                 <img src="{{ $img }}" alt="{{ $tourPackage->name }} image"
                                     class="w-full h-full object-cover aspect-square transform group-hover:scale-110 transition-transform duration-300" />
                             </a>
