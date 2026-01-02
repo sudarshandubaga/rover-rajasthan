@@ -124,7 +124,12 @@
                             <tr class="hover:bg-slate-50">
                                 <td class="py-4 px-6 font-medium">{{ $cab->vehicle_type }}</td>
                                 <td class="py-4 px-6">{{ $cab->capacity }} Seater</td>
-                                <td class="py-4 px-6">₹{{ $cab->fare }}/km</td>
+                                <td class="py-4 px-6">
+                                    @if (parseFloat($cab->regular_fare) > $cab->fare)
+                                        <del class="text-xs text-gray-500">₹{{ $cab->regular_fare ?: $cab->fare }}/km</del>
+                                    @endif
+                                    <span class="text-lg font-bold">₹{{ $cab->fare }}/km</span>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
