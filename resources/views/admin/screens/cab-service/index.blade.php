@@ -42,8 +42,7 @@
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-primary btn-sm"
-                                                data-bs-target="#cabServiceModal{{ $cabService->id }}"
-                                                data-bs-toggle="modal">
+                                                data-bs-target="#cabServiceModal{{ $cabService->id }}" data-bs-toggle="modal">
                                                 Add / View Data
                                             </button>
                                         </td>
@@ -58,8 +57,7 @@
                                             </button>
 
                                             <!-- Cab Service Details Modal -->
-                                            <div class="modal fade" id="cabServiceModal{{ $cabService->id }}"
-                                                tabindex="-1">
+                                            <div class="modal fade" id="cabServiceModal{{ $cabService->id }}" tabindex="-1">
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
 
@@ -93,12 +91,10 @@
                                                                                         id="image_{{ $cabService->id }}_{{ $i }}"
                                                                                         style="height: 80px;">
                                                                                 </td>
-                                                                                <td
-                                                                                    id="title_{{ $cabService->id }}_{{ $i }}">
+                                                                                <td id="title_{{ $cabService->id }}_{{ $i }}">
                                                                                     {{ $cabService['title' . $i] ?? '-' }}
                                                                                 </td>
-                                                                                <td
-                                                                                    id="description_{{ $cabService->id }}_{{ $i }}">
+                                                                                <td id="description_{{ $cabService->id }}_{{ $i }}">
                                                                                     {{ $cabService['description' . $i] ?? '-' }}
                                                                                 </td>
                                                                                 <td>
@@ -107,7 +103,7 @@
                                                                                         style="white-space: nowrap;"
                                                                                         data-index="{{ $i }}"
                                                                                         data-id="{{ $cabService->id }}"
-                                                                                        data-cabdata='{!! json_encode($cabService) !!}'>
+                                                                                        data-cabdata='@json($cabService)'>
                                                                                         Add / Edit
                                                                                     </button>
                                                                                 </td>
@@ -118,8 +114,7 @@
                                                             </div>
 
                                                             {{-- FORM View - Hidden by default --}}
-                                                            <form
-                                                                action="{{ route('admin.cab-service.details', $cabService) }}"
+                                                            <form action="{{ route('admin.cab-service.details', $cabService) }}"
                                                                 data-id="{{ $cabService->id }}" class="details-form d-none"
                                                                 method="post">
                                                                 @csrf
@@ -128,19 +123,21 @@
 
                                                                 <div class="mb-3">
                                                                     <label class="form-label fw-bold">Title</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="row_title"
+                                                                    <input type="text" class="form-control" name="row_title"
                                                                         id="row_title_{{ $cabService->id }}">
                                                                 </div>
 
                                                                 <div class="mb-3">
                                                                     <label class="form-label fw-bold">Description</label>
-                                                                    <textarea name="row_description" id="row_description_{{ $cabService->id }}" class="form-control" rows="10"></textarea>
+                                                                    <textarea name="row_description"
+                                                                        id="row_description_{{ $cabService->id }}"
+                                                                        class="form-control" rows="10"></textarea>
                                                                 </div>
 
                                                                 <div class="mb-3">
                                                                     <label class="form-label fw-bold">Image</label>
-                                                                    <x-crop-image name="row_image" image_file="row_image"
+                                                                    <x-crop-image name="row_image"
+                                                                        id="row_image_{{ $cabService->id }}" image_file="row_image"
                                                                         width="700" height="500" image="" />
                                                                 </div>
 
@@ -182,14 +179,14 @@
 
 @push('extra_scripts')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
-            $(document).on("click", ".add_edit_data_btn", function() {
+            $(document).on("click", ".add_edit_data_btn", function () {
                 let self = $(this),
                     index = self.data('index'),
                     cabData = self.data('cabdata');
 
-                console.log('ID : ', cabData.id);
+                console.log('ID : ', cabData);
 
 
                 $('.details-form').removeClass('d-none');
@@ -199,15 +196,27 @@
                 $('#row_index_' + cabData.id).val(index);
                 $('#row_title_' + cabData.id).val(cabData[`title${index}`]);
                 $('#row_description_' + cabData.id).val(cabData[`description${index}`]);
+
+                // Update Image Preview
+                let uniqueId = 'row_image_' + cabData.id;
+                let dropZone = $('#drop-zone-' + uniqueId);
+                let imageSrc = cabData[`image${index}`];
+
+                dropZone.find('img').remove(); // Remove existing
+                $('#cropped-image-' + uniqueId).val(''); // Clear hidden input value
+
+                if (imageSrc) {
+                    dropZone.append(`<img src="${imageSrc}" alt="Preview Image" style="max-width: 100%; max-height: 200px; display: block; margin: 0 auto;">`);
+                }
             });
 
-            $(document).on("click", ".btn-cancel-edit", function() {
+            $(document).on("click", ".btn-cancel-edit", function () {
                 $('.details-form').addClass('d-none');
                 $('.list-data').removeClass('d-none');
             });
 
             // Save Form AJAX (Optional)
-            $(".details-form").on("submit", function(e) {
+            $(".details-form").on("submit", function (e) {
                 e.preventDefault();
 
                 let formData = new FormData(this);
@@ -220,12 +229,17 @@
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function(res) {
+                    success: function (res) {
                         // alert("Saved Successfully!");
 
                         $(`#title_${id}_${index}`).html(res[`title${index}`]);
                         $(`#description_${id}_${index}`).html(res[`description${index}`]);
                         $(`#image_${id}_${index}`).attr('src', res[`image${index}`]);
+
+                        // Update stored data on all buttons for this ID
+                        $(`.add_edit_data_btn[data-id='${id}']`).each(function () {
+                            $(this).data('cabdata', res);
+                        });
 
                         $('.details-form').addClass('d-none');
                         $('.list-data').removeClass('d-none');
@@ -240,7 +254,7 @@
             $.ajax({
                 url,
                 type: "GET",
-                success: function(data) {
+                success: function (data) {
                     // Loop six rows
                     for (let i = 1; i <= 6; i++) {
                         $(`input[name="title${i}]`).val(data[`title${i}`] ?? '');
