@@ -76,8 +76,7 @@
                                                                     <thead class="table-light">
                                                                         <tr>
                                                                             <th width="35%">Image</th>
-                                                                            <th width="20%">Title</th>
-                                                                            <th width="45%">Description</th>
+                                                                            <th width="65%">Title</th>
                                                                             <th>Actions</th>
                                                                         </tr>
                                                                     </thead>
@@ -93,9 +92,6 @@
                                                                                 </td>
                                                                                 <td id="title_{{ $cabService->id }}_{{ $i }}">
                                                                                     {{ $cabService['title' . $i] ?? '-' }}
-                                                                                </td>
-                                                                                <td id="description_{{ $cabService->id }}_{{ $i }}">
-                                                                                    {{ $cabService['description' . $i] ?? '-' }}
                                                                                 </td>
                                                                                 <td>
                                                                                     <button type="button"
@@ -233,7 +229,6 @@
                         // alert("Saved Successfully!");
 
                         $(`#title_${id}_${index}`).html(res[`title${index}`]);
-                        $(`#description_${id}_${index}`).html(res[`description${index}`]);
                         $(`#image_${id}_${index}`).attr('src', res[`image${index}`]);
 
                         // Update stored data on all buttons for this ID
