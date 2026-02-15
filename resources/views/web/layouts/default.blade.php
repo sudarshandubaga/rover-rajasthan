@@ -54,8 +54,10 @@
 
     <x-footer />
 
+    <x-whatsapp-button />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         // Toggle mobile menu
         document.getElementById('mobile-menu-toggle').addEventListener('click', () => {
