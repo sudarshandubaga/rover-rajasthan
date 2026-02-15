@@ -24,31 +24,31 @@ class AdminMenuSeeder extends Seeder
 
         $this->addRow([
             'label' => 'Dashboard',
-            'icon'  => 'bx bxs-dashboard',
+            'icon' => 'bx bxs-dashboard',
             'route_name' => 'admin.dashboard',
         ]);
 
         $this->addRow([
             'label' => 'Slider',
-            'icon'  => 'bx bxs-carousel',
+            'icon' => 'bx bxs-carousel',
             'route_name' => 'admin.slider.index',
         ]);
 
         $this->addRow([
             'label' => 'Cities',
-            'icon'  => 'bx bxs-city',
+            'icon' => 'bx bxs-city',
             'route_name' => 'admin.city.index',
         ]);
 
         $this->addRow([
             'label' => 'Pages',
-            'icon'  => 'bx bx-notepad',
+            'icon' => 'bx bx-notepad',
             'route_name' => 'admin.page.index'
         ]);
 
         $this->addRow([
             'label' => 'Cab Type',
-            'icon'  => 'bx bxs-bus',
+            'icon' => 'bx bxs-bus',
         ]);
 
         $this->addRow([
@@ -63,7 +63,7 @@ class AdminMenuSeeder extends Seeder
 
         $this->addRow([
             'label' => 'Cab Service',
-            'icon'  => 'bx bxs-taxi',
+            'icon' => 'bx bxs-taxi',
         ]);
 
         $this->addRow([
@@ -78,7 +78,7 @@ class AdminMenuSeeder extends Seeder
 
         $this->addRow([
             'label' => 'FAQ',
-            'icon'  => 'bx bx-question-mark',
+            'icon' => 'bx bx-question-mark',
         ]);
 
         $this->addRow([
@@ -108,7 +108,7 @@ class AdminMenuSeeder extends Seeder
 
         $this->addRow([
             'label' => 'Blog',
-            'icon'  => 'bx bx-pin',
+            'icon' => 'bx bx-pin',
         ]);
 
         $this->addRow([
@@ -123,20 +123,26 @@ class AdminMenuSeeder extends Seeder
 
         $this->addRow([
             'label' => 'Enquiry',
-            'icon'  => 'bx bx-phone',
+            'icon' => 'bx bx-phone',
             'route_name' => 'admin.enquiry.index',
         ]);
 
         $this->addRow([
             'label' => 'Booking Enquiry',
-            'icon'  => 'bx bx-phone',
+            'icon' => 'bx bx-phone',
             'route_name' => 'admin.booking-enquiry.index',
         ]);
 
         $this->addRow([
             'label' => 'Customized Tour Enquiry',
-            'icon'  => 'bx bx-phone',
+            'icon' => 'bx bx-phone',
             'route_name' => 'admin.customize-tour-enquiry.index',
+        ]);
+
+        $this->addRow([
+            'label' => 'Feedback',
+            'icon' => 'bx bx-pin',
+            'route_name' => 'admin.feedback.index',
         ]);
 
         AdminMenu::insert($this->data);

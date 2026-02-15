@@ -60,6 +60,9 @@
                             class="hover:text-orange-600 transition">Contact
                             Us</a>
                     </li>
+                    <li class="mt-3">
+                        <a href="{{ route('feedback.index') }}" class="hover:text-orange-600 transition">Feedback</a>
+                    </li>
                 </ul>
             </div>
 

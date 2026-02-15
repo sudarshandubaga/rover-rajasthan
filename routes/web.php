@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiryController as ControllersEnquiryController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\PageController as ControllersPageController;
 use App\Http\Controllers\SiteController;
@@ -59,7 +60,9 @@ Route::group([
             'blog' => BlogController::class,
             'tour-package' => ControllersTourPackageController::class,
             'page' => ControllersPageController::class,
+            'feedback' => FeedbackController::class,
         ]);
+        Route::patch('/feedback/{feedback}/toggle-status', [FeedbackController::class, 'toggleStatus'])->name('feedback.toggle-status');
     });
 });
 
@@ -71,4 +74,9 @@ Route::get('/cab-service/{cabService}', [WebCabServiceController::class, 'show']
 Route::resource('/blog', BlogController::class)->only(['show']);
 Route::resource('/cab', CabController::class)->only(['show']);
 Route::resource('/booking-enquiry', BookingEnquiryController::class)->only(['store']);
+
+Route::get('/feedback', [FeedbackController::class, 'showFeedbackPage'])->name('feedback.index');
+
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+
 Route::get('{page}', [PageController::class, 'show'])->name('page.show');
